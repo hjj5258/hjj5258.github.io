@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="数据   数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。数据不仅仅包括整型，实类等数据类型，还包括最重要的数字和字符等文字数据。这里所说的数据，就是符号，要满足以下两个条件： 可以输入到计算机中 能被计算机程序处理     数据元素   数据元素：数据元素是组成数据的基本单位，在计算机中通常作为整体处理，也被称为记录。比如，在人类中，什么是">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-基础铺垫">
+<meta property="og:url" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/index.html">
+<meta property="og:site_name" content="Yz&#39;s Blog">
+<meta property="og:description" content="数据   数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。数据不仅仅包括整型，实类等数据类型，还包括最重要的数字和字符等文字数据。这里所说的数据，就是符号，要满足以下两个条件： 可以输入到计算机中 能被计算机程序处理     数据元素   数据元素：数据元素是组成数据的基本单位，在计算机中通常作为整体处理，也被称为记录。比如，在人类中，什么是">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/01.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/02.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/03.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/04.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/05.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/06.png">
+<meta property="og:updated_time" content="2019-12-01T10:34:22.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-基础铺垫">
+<meta name="twitter:description" content="数据   数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。数据不仅仅包括整型，实类等数据类型，还包括最重要的数字和字符等文字数据。这里所说的数据，就是符号，要满足以下两个条件： 可以输入到计算机中 能被计算机程序处理     数据元素   数据元素：数据元素是组成数据的基本单位，在计算机中通常作为整体处理，也被称为记录。比如，在人类中，什么是">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/01/数据结构-基础铺垫/01.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>数据结构-基础铺垫</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/04/21/01-英语二-句子的构成/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/12/01/数据结构-基础铺垫/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&text=数据结构-基础铺垫"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&is_video=false&description=数据结构-基础铺垫"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构-基础铺垫&body=Check out this article: http://yoursite.com/2019/12/01/数据结构-基础铺垫/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&name=数据结构-基础铺垫&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        数据结构-基础铺垫
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Yz's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-12-01T10:26:46.000Z" itemprop="datePublished">2019-12-01</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/数据结构/">数据结构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <ol>
+<li>数据</li>
+</ol>
+<ul>
+<li>数据：是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。数据不仅仅包括整型，实类等数据类型，还包括最重要的数字和字符等文字数据。这里所说的数据，就是符号，要满足以下两个条件：<ul>
+<li>可以输入到计算机中</li>
+<li>能被计算机程序处理</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>数据元素</li>
+</ol>
+<ul>
+<li>数据元素：数据元素是组成数据的基本单位，在计算机中通常作为整体处理，也被称为记录。比如，在人类中，什么是数据元素？当然是人啦。<br>畜类呢？牛、马、羊等动物，当人就是畜类的数据元素。</li>
+</ul>
+<ol start="3">
+<li>数据项</li>
+</ol>
+<ul>
+<li>数据项：一个数据元素可以由若干个数据项组成。比如人是一个数据元素，可以有眼、耳、鼻、嘴、手、脚这些数据项，也可以是姓名、年龄、出生地址等这些数据项，具体有哪些数据项目，是根据你系统所决定的。<strong>数据项</strong>是<strong>数据</strong>不可分割的<strong>最小单位</strong></li>
+</ul>
+<ol start="4">
+<li>数据对象</li>
+</ol>
+<ul>
+<li>数据对象：是性质相同的数据元素的集合，是数据的子集。性质相同是指具有相同的数量和类型的数据项，比如，人都有姓名、生日、性别等相同的数据项。在实际应用中，处理的数据元素通常具有相同性质，在不产生混淆的情况下，我们都将数据对象简称为数据。</li>
+</ul>
+<ol start="5">
+<li>数据结构</li>
+</ol>
+<ul>
+<li>结构：所谓结构简单理解就是关系，比如分子结构，就是组成分子的原子之间的排列方式。不同的数据元素之间不是独立的，而是存在特定关系，我们将这些关系称为结构。</li>
+<li>数据结构：是相互之间存在一种或多种特定关系的数据元素的集合。</li>
+</ul>
+<ol start="6">
+<li>定义中的一种或多种特定关系，具体是什么样的关系？<br>按照视点不同，我们把<strong>数据结构分为逻辑结构与物理结构</strong>。</li>
+<li>逻辑结构</li>
+</ol>
+<ul>
+<li><p>逻辑结构：是指数据对象中数据元素之间的相互关系。</p>
+<ul>
+<li>集合结构：集合结构中的数据元素除了同属于一个集合外，它们之间没有任何关系，可以理解为数学中的集合。<br><img src="/2019/12/01/数据结构-基础铺垫/01.png" alt="image"></li>
+<li>线性结构：线性结构中的数据元素之间是一对一的关系。<br><img src="/2019/12/01/数据结构-基础铺垫/02.png" alt="image"></li>
+<li>树形结构：树形结构中的数据元素之间存在一种一对多的层次关系。例如，计算机的文件系统就是树形的。<br><img src="/2019/12/01/数据结构-基础铺垫/03.png" alt="image"></li>
+<li>图形结构：图形结构的数据元素是多对多的关系。<br><img src="/2019/12/01/数据结构-基础铺垫/04.png" alt="image"></li>
+</ul>
+<p>逻辑结构是针对具体问题的，是为解决某个问题，在对问题理解的基础上，选择一个合适的数据结构表示数据元素之间的逻辑关系。</p>
+</li>
+</ul>
+<ol start="8">
+<li><p>物理结构</p>
+<ul>
+<li><p>物理结构：是指数据的逻辑结构在计算机中的存储形式（也叫存储结构）。</p>
+<p>数据是数据元素的集合，那么根据物理结构的定义，我们可以理解为如何把数据元素存储到计算机的存储器中，存储器主要针对内存而言，对于外部存储器数据通常用文件结构去描述。</p>
+<p><strong>数据的存储结构应正确的反映数据元素之间的逻辑关系，这才是最为关键的，如何存储数据元素的逻辑关系，是实现物理结构（在计算机中）的难点与重点</strong></p>
+<p>数据元素的存储结构形式有两种：顺序存储和链式存储</p>
+</li>
+<li><p>顺序存储结构<br>顺序存储结构：是把数据元素放在地址连续的存储单元里，其数据间的逻辑关系和物理关系是一致的。说白了就是排队占位，谁也别插谁的队。在计算机语言中往往表现为数组。<br><img src="/2019/12/01/数据结构-基础铺垫/05.png" alt="image"></p>
+</li>
+<li><p>链式存储结构<br>链式存储结构：是把数据元素放在任意的存储单元里，这组存储单元是可以连续的，也可以是不连续的。<br>比如现在的银行、医院，都设置了排队系统，每个人去了都是先领一个号，等叫到时候去办理业务或看病。而这里的数据元素总在变化，整个结构都处于变化之中。</p>
+<p>数据元素的存储关系不能反映其逻辑关系，因此需要用一个指针存放数据元素的地址，这样就能通过地址找到相关联数据元素的位置</p>
+<p><img src="/2019/12/01/数据结构-基础铺垫/06.png" alt="image"></p>
+<p>显然，链式存储结构非常灵活，数据存在哪里并不重要，只需要有一个指针存放了相应的地址就能找到它了。</p>
+<p>逻辑结构是面向问题的，而物理结构是面向计算机的，其基本的目标就是将数据及其逻辑关系存储到计算机内存中。    </p>
+</li>
+</ul>
+</li>
+<li><p>数据类型</p>
+<ul>
+<li><p>数据类型：是指一组性质相同的值的集合及定义在此集合中的一些操作的总称。</p>
+<p>在现实世界中，大家都需要住房子，也都希望房子越大越好。但显然，没有钱。于是就出现了各种各样的房型，有别墅，有错层的，有单间的……，这样就满足了不同人的需要。</p>
+<p>在计算机里也是如此，比如你要计算计算1+1=2、3+5=8，可以使用整型数字进行加减运算，显然不需要开辟很大的适合小数甚至字符运算的内存空间，于是就有了各种各样的数据类型。在c语言中，按照取值不同，数据类型可以分为两类：</p>
+</li>
+<li>原子类型：是不可以在分解的基本类型，包括整型、实型、字符型等。</li>
+<li><p>结构类型：由若干个类型组合而成，是可以再次分解的。例如，整型数组是由若干个整型数据组成的。</p>
+<p>对于编程者来说，运算出结果才是他所关心的，根本不在乎cpu实现1+2进行了几次开关操作，所以我们就会考虑无论什么计算机，什么计算机语言，都会用到整数运算、实数运算、字符运算等操作，我们可以考虑把他们抽象出来。</p>
+<p>抽象是指抽取出事物具有的普遍性的本质，抽象是一种思考问题的方式，他隐藏了繁杂的细节，只保留了实现目标所必须的信息，如计算机当中的接口、API。</p>
+</li>
+</ul>
+</li>
+<li><p>抽象数据类型<br>抽象数据类型（Abstract Data Type,ADT）：是指一个数学模型定义在该模型上的一组操作。</p>
+<p>比如刚才的例子，不管是什么计算机上，都拥有“整型”类型，也需要整数间的运算，那么整型就是一个抽象数据类型。因此，“抽象”的意义在于数据类型的数学抽象特性。</p>
+<p>比如表示一个点，可以定义为point类型，2D的一个点可以用坐标(x,y)需要2个整型变量，3D中用(x,y,z)需要3个整型变量，这样就可以非常方便的操作一个point数据变量就能知道这一点的坐标了。</p>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/12/01/数据结构-基础铺垫/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&text=数据结构-基础铺垫"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&is_video=false&description=数据结构-基础铺垫"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构-基础铺垫&body=Check out this article: http://yoursite.com/2019/12/01/数据结构-基础铺垫/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&title=数据结构-基础铺垫"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/12/01/数据结构-基础铺垫/&name=数据结构-基础铺垫&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 Yz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
