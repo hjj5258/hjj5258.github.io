@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-13T15:13:13.480Z</updated>
+  <updated>2020-10-14T11:10:05.630Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,15 +21,18 @@
     <link href="http://yoursite.com/2020/10/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%BC%80%E7%AF%87/"/>
     <id>http://yoursite.com/2020/10/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%BC%80%E7%AF%87/</id>
     <published>2020-10-13T14:22:58.000Z</published>
-    <updated>2020-10-13T15:13:13.480Z</updated>
+    <updated>2020-10-14T11:10:05.630Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>我是什么时候要学习操作系统的？在今年10月份，我开始了计算机基础知识的学习，在有了一定的组成原理的知识之后，开始了操作系统的学习，<br>咨询了相关大佬后，推荐了我操作系统导论这本书 + xv6(MIT 6.828)<br>看了迟先生的GitHub，也萌发了我想自己东西写一个操作系统。<br>此书围绕三个主题开展对操作系统的介绍：<ul><li>虚拟化（virtualization）</li><li>并发（concurrency）</li><li>持久性（persistence）</li></ul></li><li>为什么要学习操作系统？<ul><li>了解操作系统如何做到运行多个程序？</li><li>了解操作系统里的基本概念：什么是进程、线程、以及为什么线程之间会有许多问题？</li><li>了解操作系统是怎么进行调度的？</li><li>了解操作系统如何进行文件管理？</li></ul></li><li>学了之后有什么用<ul><li>在学习完之后，会对程序在操作系统后如何运行和管理的，有一个全貌的了解<br>对组成原理的知识能够串联起来，对于多线程编程会更加清晰，学习JVM也会变得更加简单…</li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<ul><li><p>如何学习操作系统？<br>  在有了一定的组成原理的知识之后，开始了操作系统的学习，<br>  咨询了相关大佬后，推荐了我操作系统导论这本书 + xv6(MIT 6.828)。</p><p>  此书围绕三个主题开展对操作系统的介绍：</p><ul><li>虚拟化（virtualization）</li><li>并发（concurrency）</li><li>持久性（persistence）</li></ul></li><li><p>为什么要学习操作系统？</p><ul><li>了解操作系统如何做到运行多个程序？</li><li>了解操作系统里的基本概念：什么是进程、线程、以及为什么线程之间会有许多问题？</li><li>了解操作系统是怎么进行调度的？</li><li>了解操作系统如何进行文件管理？</li></ul></li><li>学了之后有什么用<ul><li>在学习完之后，会对程序在操作系统后如何运行和管理的，有一个全貌的了解<br>对组成原理的知识能够串联起来，对于多线程编程会更加清晰，学习JVM也会变得更加简单…</li></ul></li></ul>]]></content>
     
     
       
       
     <summary type="html">&lt;ul&gt;
-&lt;li&gt;我是什么时候要学习操作系统的？在今年10月份，我开始了计算机基础知识的学习，在有了一定的组成原理的知识之后，开始了操作系统的学习，&lt;br&gt;咨询了相关大佬后，推荐了我操作系统导论这本书 + xv6(MIT 6.828)&lt;br&gt;看了迟先生的GitHub，也萌发了我想</summary>
+&lt;li&gt;&lt;p&gt;如何学习操作系统？&lt;br&gt;  在有了一定的组成原理的知识之后，开始了操作系统的学习，&lt;br&gt;  咨询了相关大佬后，推荐了我操作系统导论这本书 + xv6(MIT 6.828)。&lt;/p&gt;
+&lt;p&gt;  此书围绕三个主题开展对操作系统的介绍：&lt;/p&gt;
+&lt;ul&gt;
+&lt;</summary>
       
     
     
