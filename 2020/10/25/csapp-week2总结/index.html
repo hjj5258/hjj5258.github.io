@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/25/csapp-week2总结/image-20201025174426948.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/25/csapp-week2总结/image-20201025174437314.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/25/csapp-week2总结/image-20201025174746950.png">
-<meta property="og:updated_time" content="2020-10-25T09:57:47.685Z">
+<meta property="og:updated_time" content="2020-10-25T10:01:35.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="csapp:week2总结">
 <meta name="twitter:description" content="csapp week 2 总结 字节：8个位  计算机通过2进制码，进行执行，大部分计算机系统使用ASCII码表示文本字符  程序的生命周期  预处理阶段：告诉预处理读取所需的系统头文件，并把它插入到程序文本中，得到完整的程序并生成 .i文件 编译阶段：编译器将文本文件hello.i翻译成文本文件hello.s，它包含一个汇编语言程序 汇编阶段：汇编器将hello.s翻译成机器语言指令，把这些指令">
@@ -165,7 +165,7 @@
 <li>预处理阶段：告诉预处理读取所需的系统头文件，并把它插入到程序文本中，得到完整的程序并生成 .i文件</li>
 <li>编译阶段：编译器将文本文件hello.i翻译成文本文件hello.s，它包含一个汇编语言程序</li>
 <li>汇编阶段：汇编器将hello.s翻译成机器语言指令，把这些指令打包成可重定位目标程序的格式，并将结果保存在文件hello.o文件中，它是一个二进制文件</li>
-<li>链接阶段：程序中调用的其他的函数指令，例如printf函数，它会把预编译好的printf.o以某种方式合并到hello.o程序中去，链接器就负责处理者种合并，结果就得到hello文件，他是一个可以执行文件，可以被加载到内存中，由系统执行<br><img src="/2020/10/25/csapp-week2总结/image-20201025171329299.png" alt="image-20201025171329299"></li>
+<li>链接阶段：程序中调用的其他的函数指令，例如printf函数，它会把预编译好的printf.o以某种方式合并到hello.o程序中去，链接器就负责处理这种合并，结果就得到hello文件，他是一个可以执行文件，可以被加载到内存中，由系统执行<br><img src="/2020/10/25/csapp-week2总结/image-20201025171329299.png" alt="image-20201025171329299"></li>
 <li>把import所需的类插入到程序  -&gt; 编译成汇编代码  -&gt; 汇编代码  -&gt; 二进制代码  -&gt; 链接所需库的预编译文件  -&gt;可执行文件</li>
 </ul>
 </li>
@@ -235,7 +235,7 @@
 <p><img src="/2020/10/25/csapp-week2总结/image-20201025174426948.png" alt="image-20201025174426948"></p>
 <p><img src="/2020/10/25/csapp-week2总结/image-20201025174437314.png" alt="image-20201025174437314"></p>
 </li>
-<li><p>并发：指一个同事具有多个活动，两个人抢一个厕所</p>
+<li><p>并发：指一个同时具有多个活动，两个人抢一个厕所</p>
 </li>
 <li><p>并行：一次同时运行多个，两个人同时上厕所，一人一个厕所</p>
 </li>
