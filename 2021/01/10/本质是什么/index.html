@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="本质到底是什么？本质，通过表面的，在骨子里的，有价值内涵的东西? 不得不说，在学习数学上，你或许也有这样的启发，例如：高斯算法，在计算1+2+3….+100=？你会怎样做？你会使用一个一个数的想加吗？还是像高斯一样使用倒序排列上述然后想加，最终每个列想加的数都是一样的，在乘以多少个列，在除以2得到最终结果。那么重点来了？高斯是怎么知道的呢？难度这就是天才吗？ 下面就具体问题具体分析，在我们所经历的">
+<meta name="keywords" content="感悟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本质是什么?">
+<meta property="og:url" content="http://yoursite.com/2021/01/10/本质是什么/index.html">
+<meta property="og:site_name" content="Yz&#39;s Blog">
+<meta property="og:description" content="本质到底是什么？本质，通过表面的，在骨子里的，有价值内涵的东西? 不得不说，在学习数学上，你或许也有这样的启发，例如：高斯算法，在计算1+2+3….+100=？你会怎样做？你会使用一个一个数的想加吗？还是像高斯一样使用倒序排列上述然后想加，最终每个列想加的数都是一样的，在乘以多少个列，在除以2得到最终结果。那么重点来了？高斯是怎么知道的呢？难度这就是天才吗？ 下面就具体问题具体分析，在我们所经历的">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-01-10T15:14:58.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本质是什么?">
+<meta name="twitter:description" content="本质到底是什么？本质，通过表面的，在骨子里的，有价值内涵的东西? 不得不说，在学习数学上，你或许也有这样的启发，例如：高斯算法，在计算1+2+3….+100=？你会怎样做？你会使用一个一个数的想加吗？还是像高斯一样使用倒序排列上述然后想加，最终每个列想加的数都是一样的，在乘以多少个列，在除以2得到最终结果。那么重点来了？高斯是怎么知道的呢？难度这就是天才吗？ 下面就具体问题具体分析，在我们所经历的">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>本质是什么?</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+<link rel="alternate" href="/atom.xml" title="Yz's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/10/25/csapp-week2总结/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/01/10/本质是什么/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/01/10/本质是什么/&text=本质是什么?"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/01/10/本质是什么/&is_video=false&description=本质是什么?"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=本质是什么?&body=Check out this article: http://yoursite.com/2021/01/10/本质是什么/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/01/10/本质是什么/&name=本质是什么?&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本质到底是什么？"><span class="toc-number">1.</span> <span class="toc-text">本质到底是什么？</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        本质是什么?
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Yz's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-01-10T15:07:05.000Z" itemprop="datePublished">2021-01-10</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/感悟/">感悟</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="本质到底是什么？"><a href="#本质到底是什么？" class="headerlink" title="本质到底是什么？"></a>本质到底是什么？</h2><p>本质，通过表面的，在骨子里的，有价值内涵的东西?</p>
+<p>不得不说，在学习数学上，你或许也有这样的启发，例如：高斯算法，在计算1+2+3….+100=？<br>你会怎样做？你会使用一个一个数的想加吗？还是像高斯一样使用倒序排列上述然后想加，最终每个列想加的数都是一样的，在乘以多少个列，在除以2得到最终结果。<br>那么重点来了？高斯是怎么知道的呢？难度这就是天才吗？</p>
+<p>下面就具体问题具体分析，在我们所经历的教育里，真正你学会了什么？公式的运用？数学到底是什么呢？我觉得它是一种思维的抽象，是思维的升级，<br>在解题的时候我们往往有多种解题思路，有的人10步，有的人5步，有的人2步，这难道是智商的不同？<br>我觉得不竟然是全部，往往高斯这类人更能想到问题的本质，驾驭数学，让它随意的变成自己的工具，这就是长期锻炼大脑所带来的能力，只是在表面看来是解题快，所以这正是思考，思考能让大脑得到进化，也就是所谓的聪明。<br>在现代社会里，人很容易丧失独立的思考能力，也使人的大脑不但没有得到进化，反而使人拒绝思考，让大脑变得懒惰，反正有高斯的公式，我带入就可以得到结果了，开开心心交卷，反正我分数拿到手了，我不用去想他是怎么推论得来的公式但这也扼杀了你的创造性，从自己推到公式到得到结论，再到验证结论，这个过程也是你的思维在进化，这将会变成你自己的东西。</p>
+<p>不断的提高你的境界水平，这才是本质，如何才能知道，你是否理解到本质了，首先你要明白发明人到底为什么这样做，做的目的是什么？和原有的又有什么升级？是否具有通用条件，答案就是多几个深层次的为什么，别小看这几个为什么，这能给你打开一扇往下深挖的大门，当你越是往下挖，你就会知道的越多，知道的越多，就会越来越觉得自己渺小，保持对事物的渴望，你就会成几何倍速的疯狂吸收，<br>并且新的问题也又会引发你的思考，直到循环结束，条件为你已经很轻松的理解，并且自己也能独立的做出来（推论），直到你觉得这件事情对你没有任何挑战，你会渐渐的感到厌烦厌恶这个层次的东西。<br>所以总结一下，本质就是循环，知道条件为true的时候，那么这就会终止，它就是真理永恒存在，直到后人依旧觉得它很美。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本质到底是什么？"><span class="toc-number">1.</span> <span class="toc-text">本质到底是什么？</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/01/10/本质是什么/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/01/10/本质是什么/&text=本质是什么?"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/01/10/本质是什么/&is_video=false&description=本质是什么?"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=本质是什么?&body=Check out this article: http://yoursite.com/2021/01/10/本质是什么/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/01/10/本质是什么/&title=本质是什么?"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/01/10/本质是什么/&name=本质是什么?&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Yz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
