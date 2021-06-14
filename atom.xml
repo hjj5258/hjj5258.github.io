@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-06-13T13:16:42.854Z</updated>
+  <updated>2021-06-14T12:33:09.152Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JVM系列:基本原理</title>
+    <link href="http://yoursite.com/2021/06/14/JVM%E7%B3%BB%E5%88%97-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"/>
+    <id>http://yoursite.com/2021/06/14/JVM%E7%B3%BB%E5%88%97-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</id>
+    <published>2021-06-14T10:39:46.000Z</published>
+    <updated>2021-06-14T12:33:09.152Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>为什么我们要学习JVM？<ul><li>学习JVM，能更好的了解程序为什么是这样运作的</li><li>能够自定义参数，优化JVM，使得我们的程序在JVM中获得更好的性能 </li></ul></li><li>先来看下大致的流程图<br><img src="/2021/06/14/JVM系列-基本原理/01.png" alt="image"></li></ul><p>首先我们来创建几个用于测试的类</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Init A class"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        B b = <span class="keyword">new</span> B();</span><br><span class="line">        C c = <span class="keyword">new</span> C();</span><br><span class="line">        c.test();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test method"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><p>字节码是什么？为什么有字节码<br>我们都知道Java是跨平台的，那它为什么能够跨平台，答案就是字节码，<br>  它在操作系统上层封装了JVM，使用的class字节码，对操作系统解耦了。</p></li><li><p>JVM如何使用字节码的<br>首先我们编写的x.java文件通过打包或者命令的方式编译成了.class文件，<br>JVM可以通过这些.class文件获取到相关的信息，然后用于程序的执行，默认会找到main方法。</p></li><li><p>JVM加载字节码的过程</p><ul><li>加载<br>  加载是类加载中的一个过程，不是类加载<br>  通过全限定类名获得二进制流<br>  转化成方法区的运行时数据结构<br>  生成一个代表这个类的java Class对象，作为方法区这个类的各种数据入口</li><li>连接<ul><li>验证<br>校验.class文件是否符合JVM规范，至少它要能被JVM识别才行</li><li>准备<br>为.class文件分配所需的内存，其程序中的变量都会被初始化为 <strong>初始值</strong></li><li>解析<br>符号引用替换成直接引用</li><li>初始化<br>如果有父类，会先初始化父类<br>会执行static块代码<br>将程序中的变量，需要真正的赋予值</li></ul></li><li>使用</li><li>卸载</li></ul></li><li><p>JVM类加载</p><ul><li>什么时候加载（这个类被用到的时候）</li><li>类加载器<ul><li>启动类加载器（BootStrap ClassLoader）</li><li>扩展类加载器（Extension ClassLoader）</li><li>应用类加载器（Applicaition ClassLoader）</li><li>自定义加载器</li></ul></li><li>双亲委派机制<ul><li>作用（为了保证核心不会被串改，保证同一个文件不会被加载多次）</li><li>加载时会向上加载</li></ul></li></ul></li><li><p>JVM运行时数据区域</p><ul><li>方法区（线程共享）<br>  用于存储类、常量等信息</li><li>程序计数器（线程私有）<br>  用于存储当前执行指令位置，线程直接切换之后要知道上次执行到哪里了吧？</li><li>虚拟机栈（线程私有）<br>  存储线程中的局部变量，以及虚拟机方法调用情况，为虚拟机服务</li><li>本地方法栈<br>  虚拟机使用的到的Native方法，HotShot将虚拟机栈和本地方法栈合二为一</li><li>堆内存<br>  对象实例开辟的内存空间，对象的实际地址</li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;为什么我们要学习JVM？&lt;ul&gt;
+&lt;li&gt;学习JVM，能更好的了解程序为什么是这样运作的&lt;/li&gt;
+&lt;li&gt;能够自定义参数，优化JVM，使得我们的程序在JVM中获得更好的性能 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;先来看下大致的流程图&lt;br&gt;&lt;img sr</summary>
+      
+    
+    
+    
+    
+    <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>面试复盘总结</title>
