@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-06-14T12:33:09.152Z</updated>
+  <updated>2021-07-24T14:52:38.006Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原则</title>
+    <link href="http://yoursite.com/2021/07/24/%E5%8E%9F%E5%88%99/"/>
+    <id>http://yoursite.com/2021/07/24/%E5%8E%9F%E5%88%99/</id>
+    <published>2021-07-24T14:45:37.000Z</published>
+    <updated>2021-07-24T14:52:38.006Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="本文是思考后总结的原则，不限定类型，不限定时间新增，遇到问题即可打开"><a href="#本文是思考后总结的原则，不限定类型，不限定时间新增，遇到问题即可打开" class="headerlink" title="本文是思考后总结的原则，不限定类型，不限定时间新增，遇到问题即可打开"></a>本文是思考后总结的原则，不限定类型，不限定时间新增，遇到问题即可打开</h3><ul><li><p>处理问题原则：</p><ul><li>有没有问过自己如何解决？</li><li>有没有参考类似问题的解决方案？</li><li>有没有尝试让身边的人有经验的人帮忙？</li><li>问题无法解决，有没有反馈？</li><li>解决问题，而不是逃避问题，自己在憋屁！</li><li>不要因为他人问题而导致自己问题的产生！</li></ul></li><li><p>提问的原则</p><ul><li>是否避免了xy问题？</li><li>描述是否简介，原问题是什么？我的解决方案是什么？我尝试做的时候遇到什么？（问题的一生）</li><li>提问之前，能不能自己多考虑一下，可以把几个问题合并一起问？</li></ul></li><li><p>沟通原则</p><ul><li>能否简洁的描述清楚？询问过对方理解吗？保证准确无误的传递信息</li><li>多用“我们”、“我”之间的口吻描述，拉近距离，拒绝使用“你们”、“你”等口吻描述</li><li>尊重对方有不同意见，尽量让双方达成意见一致</li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;本文是思考后总结的原则，不限定类型，不限定时间新增，遇到问题即可打开&quot;&gt;&lt;a href=&quot;#本文是思考后总结的原则，不限定类型，不限定时间新增，遇到问题即可打开&quot; class=&quot;headerlink&quot; title=&quot;本文是思考后总结的原则，不限定类型，不限定时间新</summary>
+      
+    
+    
+    
+    
+    <category term="原则" scheme="http://yoursite.com/tags/原则/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM系列:基本原理</title>
