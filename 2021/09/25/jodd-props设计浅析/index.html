@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="起因最近在做信创改造的项目中接触到 jodd 框架，在原有项目中的配置文件第一次见到还可以这样写配置文件的…，所以思来想去这个问题一直想知道答案，今天就来研究研究 简介文档如下：doc 至于为什么使用 jodd 的props？他对原生JDK有兼容性，但对JDK做了增强。你可以理解为包装了一层，加入了一些方便他人使用的特性 原理浅析其实也就是加载特定的文件 -&amp;gt; 解析 -&amp;gt; 存储Mata">
+<meta name="keywords" content="jodd框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jodd-props设计浅析">
+<meta property="og:url" content="http://yoursite.com/2021/09/25/jodd-props设计浅析/index.html">
+<meta property="og:site_name" content="Yz&#39;s Blog">
+<meta property="og:description" content="起因最近在做信创改造的项目中接触到 jodd 框架，在原有项目中的配置文件第一次见到还可以这样写配置文件的…，所以思来想去这个问题一直想知道答案，今天就来研究研究 简介文档如下：doc 至于为什么使用 jodd 的props？他对原生JDK有兼容性，但对JDK做了增强。你可以理解为包装了一层，加入了一些方便他人使用的特性 原理浅析其实也就是加载特定的文件 -&amp;gt; 解析 -&amp;gt; 存储Mata">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-09-25T14:54:19.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jodd-props设计浅析">
+<meta name="twitter:description" content="起因最近在做信创改造的项目中接触到 jodd 框架，在原有项目中的配置文件第一次见到还可以这样写配置文件的…，所以思来想去这个问题一直想知道答案，今天就来研究研究 简介文档如下：doc 至于为什么使用 jodd 的props？他对原生JDK有兼容性，但对JDK做了增强。你可以理解为包装了一层，加入了一些方便他人使用的特性 原理浅析其实也就是加载特定的文件 -&amp;gt; 解析 -&amp;gt; 存储Mata">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>jodd-props设计浅析</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+<link rel="alternate" href="/atom.xml" title="Yz's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/07/29/谈痛感/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/09/25/jodd-props设计浅析/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&text=jodd-props设计浅析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&is_video=false&description=jodd-props设计浅析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=jodd-props设计浅析&body=Check out this article: http://yoursite.com/2021/09/25/jodd-props设计浅析/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&name=jodd-props设计浅析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理浅析"><span class="toc-number">3.</span> <span class="toc-text">原理浅析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计浅析"><span class="toc-number">4.</span> <span class="toc-text">设计浅析</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        jodd-props设计浅析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Yz's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-09-25T14:29:05.000Z" itemprop="datePublished">2021-09-25</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/jodd框架/">jodd框架</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>最近在做信创改造的项目中接触到 jodd 框架，在原有项目中的配置文件第一次见到还可以这样写配置文件的…，<br>所以思来想去这个问题一直想知道答案，今天就来研究研究</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>文档如下：<a href="https://props.jodd.org" target="_blank" rel="noopener">doc</a></p>
+<p>至于为什么使用 jodd 的props？他对原生JDK有兼容性，但对JDK做了增强。<br>你可以理解为包装了一层，加入了一些方便他人使用的特性</p>
+<h3 id="原理浅析"><a href="#原理浅析" class="headerlink" title="原理浅析"></a>原理浅析</h3><p>其实也就是加载特定的文件 -&gt; 解析 -&gt; 存储MataData(元信息)，然后还是使用的容器去读写</p>
+<p>我们存储了MataData，那么我们就可以与 Web 项目中的做集成，如转换成 Bean 加载到 Spring IoC 中做进一步的增强，注入DataSource等等</p>
+<h3 id="设计浅析"><a href="#设计浅析" class="headerlink" title="设计浅析"></a>设计浅析</h3><p>对于配置文件，我们思考一下会遇到什么场景问题？</p>
+<p>在 jodd 里，我们看到作者的设计，考虑了以下场景</p>
+<ol>
+<li>多个环境</li>
+<li>我想引用已经定义的 Key (可以参考maven中定义变量)</li>
+<li>多种编码</li>
+<li>域（如yz.xxx1、yz.xxx2、yz.xxx3）这里我把框架中的Sections理解为 [域]</li>
+<li>默认选择值（当同一个Key 有多个 Value的时候）</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理浅析"><span class="toc-number">3.</span> <span class="toc-text">原理浅析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计浅析"><span class="toc-number">4.</span> <span class="toc-text">设计浅析</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/09/25/jodd-props设计浅析/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&text=jodd-props设计浅析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&is_video=false&description=jodd-props设计浅析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=jodd-props设计浅析&body=Check out this article: http://yoursite.com/2021/09/25/jodd-props设计浅析/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&title=jodd-props设计浅析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/09/25/jodd-props设计浅析/&name=jodd-props设计浅析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Yz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/friendlink">FriendLink</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

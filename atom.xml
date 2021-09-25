@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-07-29T14:30:58.583Z</updated>
+  <updated>2021-09-25T14:54:19.029Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jodd-props设计浅析</title>
+    <link href="http://yoursite.com/2021/09/25/jodd-props%E8%AE%BE%E8%AE%A1%E6%B5%85%E6%9E%90/"/>
+    <id>http://yoursite.com/2021/09/25/jodd-props%E8%AE%BE%E8%AE%A1%E6%B5%85%E6%9E%90/</id>
+    <published>2021-09-25T14:29:05.000Z</published>
+    <updated>2021-09-25T14:54:19.029Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>最近在做信创改造的项目中接触到 jodd 框架，在原有项目中的配置文件第一次见到还可以这样写配置文件的…，<br>所以思来想去这个问题一直想知道答案，今天就来研究研究</p><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>文档如下：<a href="https://props.jodd.org" target="_blank" rel="noopener">doc</a></p><p>至于为什么使用 jodd 的props？他对原生JDK有兼容性，但对JDK做了增强。<br>你可以理解为包装了一层，加入了一些方便他人使用的特性</p><h3 id="原理浅析"><a href="#原理浅析" class="headerlink" title="原理浅析"></a>原理浅析</h3><p>其实也就是加载特定的文件 -&gt; 解析 -&gt; 存储MataData(元信息)，然后还是使用的容器去读写</p><p>我们存储了MataData，那么我们就可以与 Web 项目中的做集成，如转换成 Bean 加载到 Spring IoC 中做进一步的增强，注入DataSource等等</p><h3 id="设计浅析"><a href="#设计浅析" class="headerlink" title="设计浅析"></a>设计浅析</h3><p>对于配置文件，我们思考一下会遇到什么场景问题？</p><p>在 jodd 里，我们看到作者的设计，考虑了以下场景</p><ol><li>多个环境</li><li>我想引用已经定义的 Key (可以参考maven中定义变量)</li><li>多种编码</li><li>域（如yz.xxx1、yz.xxx2、yz.xxx3）这里我把框架中的Sections理解为 [域]</li><li>默认选择值（当同一个Key 有多个 Value的时候）</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;最近在做信创改造的项目中接触到 jodd 框架，在原有项目中的配置文件第一次见到还可以这样写配置文件的…，&lt;br&gt;所以思来想去这个问题一直想</summary>
+      
+    
+    
+    
+    
+    <category term="jodd框架" scheme="http://yoursite.com/tags/jodd框架/"/>
+    
+  </entry>
   
   <entry>
     <title>谈痛感</title>
