@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yz&#39;s Blog">
 <meta property="og:description" content="0x01 信号量定义：在计算机科学中，信号量是一种变量或抽象数据类型，用于控制多线程对公共资源的访问，避免并发系统（如多任务操作系统）中的临界区问题。一个平凡的信号量是一个普通的变量，它根据程序员定义的条件而改变（例如，增加或减少，或切换）。 0x02 初始化在操作之前我们需要初始化信号量123#include &amp;lt;semaphore.h&amp;gt; sem_t s; sem_init(&amp;amp;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-11-07T09:59:27.710Z">
+<meta property="og:updated_time" content="2021-11-07T10:01:38.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统并发之信号量">
 <meta name="twitter:description" content="0x01 信号量定义：在计算机科学中，信号量是一种变量或抽象数据类型，用于控制多线程对公共资源的访问，避免并发系统（如多任务操作系统）中的临界区问题。一个平凡的信号量是一个普通的变量，它根据程序员定义的条件而改变（例如，增加或减少，或切换）。 0x02 初始化在操作之前我们需要初始化信号量123#include &amp;lt;semaphore.h&amp;gt; sem_t s; sem_init(&amp;amp;">
@@ -104,7 +104,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-信号量"><span class="toc-number">1.</span> <span class="toc-text">0x01 信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-初始化"><span class="toc-number">2.</span> <span class="toc-text">0x02 初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-操作"><span class="toc-number">3.</span> <span class="toc-text">0x03 操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-应用"><span class="toc-number">4.</span> <span class="toc-text">0x04 应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-总结与抽象"><span class="toc-number">5.</span> <span class="toc-text">0x05 总结与抽象</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-信号量"><span class="toc-number">1.</span> <span class="toc-text">0x01 信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-初始化"><span class="toc-number">2.</span> <span class="toc-text">0x02 初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-操作"><span class="toc-number">3.</span> <span class="toc-text">0x03 操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-应用"><span class="toc-number">4.</span> <span class="toc-text">0x04 应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-总结与抽象"><span class="toc-number">5.</span> <span class="toc-text">0x05 总结与抽象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06-引用"><span class="toc-number">6.</span> <span class="toc-text">0x06 引用</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -188,6 +188,10 @@
 <ul>
 <li>数据库最大连接数，通过信号量也可以实现。</li>
 </ul>
+<h3 id="0x06-引用"><a href="#0x06-引用" class="headerlink" title="0x06 引用"></a>0x06 引用</h3><ul>
+<li>WIKI</li>
+<li>操作系统导论</li>
+</ul>
 
   </div>
 </article>
@@ -215,7 +219,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-信号量"><span class="toc-number">1.</span> <span class="toc-text">0x01 信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-初始化"><span class="toc-number">2.</span> <span class="toc-text">0x02 初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-操作"><span class="toc-number">3.</span> <span class="toc-text">0x03 操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-应用"><span class="toc-number">4.</span> <span class="toc-text">0x04 应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-总结与抽象"><span class="toc-number">5.</span> <span class="toc-text">0x05 总结与抽象</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-信号量"><span class="toc-number">1.</span> <span class="toc-text">0x01 信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-初始化"><span class="toc-number">2.</span> <span class="toc-text">0x02 初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-操作"><span class="toc-number">3.</span> <span class="toc-text">0x03 操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-应用"><span class="toc-number">4.</span> <span class="toc-text">0x04 应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-总结与抽象"><span class="toc-number">5.</span> <span class="toc-text">0x05 总结与抽象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06-引用"><span class="toc-number">6.</span> <span class="toc-text">0x06 引用</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
