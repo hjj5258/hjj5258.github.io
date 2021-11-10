@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/11/10/操作系统并发之常见问题/img_8.png">
 <meta property="og:image" content="http://yoursite.com/2021/11/10/操作系统并发之常见问题/img_9.png">
 <meta property="og:image" content="http://yoursite.com/2021/11/10/操作系统并发之常见问题/img_10.png">
-<meta property="og:updated_time" content="2021-11-10T15:41:29.232Z">
+<meta property="og:updated_time" content="2021-11-10T16:00:33.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统并发之常见问题">
 <meta name="twitter:description" content="并发程序中缺陷的类型 非死锁缺陷 死锁缺陷  在 2008 年发表的 Learning from Mistakes — A Comprehensive Study on RealWorld Concurrency Bug Characteristics 论文中，进行了详细的说明通过知名的开源软件已知的并发问题统计，发现出错最多的是非死锁缺陷 非死锁缺陷 主要有两种常见的：违反原子性、错误顺序缺陷">
@@ -164,13 +164,13 @@
 </ul>
 <p>在 2008 年发表的 <a href="https://www.cs.columbia.edu/~junfeng/09fa-e6998/papers/concurrency-bugs.pdf" target="_blank" rel="noopener">Learning from Mistakes — A Comprehensive Study on Real<br>World Concurrency Bug Characteristics</a> 论文中，进行了详细的说明<br><img src="/2021/11/10/操作系统并发之常见问题/img.png" alt="img.png"><br>通过知名的开源软件已知的并发问题统计，发现出错最多的是非死锁缺陷</p>
 <h4 id="非死锁缺陷"><a href="#非死锁缺陷" class="headerlink" title="非死锁缺陷"></a>非死锁缺陷</h4><p> 主要有两种常见的：违反原子性、错误顺序缺陷</p>
-<p> <strong>违反原子性缺陷</strong><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_1.png" alt="img_1.png"><br>   第一个线程检查 proc_info 非空后打印，第二个线程将 proc_info 指针置为 NULL<br>   现在当第一个线程进入非空判断后(line:2)，发生中断，时间片轮转到第二个线程将 proc_info 指针置为NUll，<br>   显然这样会照成引用空指针，最后程序崩溃，显然这不是我们像要的。</p>
+<p> <strong>违反原子性缺陷</strong><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_1.png" alt="img_1.png"><br>   第一个线程检查 proc_info 非空后打印，第二个线程将 proc_info 指针置为 NULL,现在当第一个线程进入非空判断后(line:2)，发生中断，时间片轮转到第二个线程将 proc_info 指针置为NUll，<br>   显然这样会照成引用空指针，最后程序崩溃，显然这不是我们像要的。</p>
 <p>   什么是原子性？要么一致，要么不一致。</p>
-<p>   定义引出：由上面的问题，我们可以定义这类问题，即 if 判断应该和代码块内部保持一致。<br>         即代码段本意是原子的，但在执行中并没有强制实现原子性。</p>
+<p>   定义引出：由上面的问题，我们可以定义这类问题，即 if 判断应该和代码块内部保持一致。即代码段本意是原子的，但在执行中并没有强制实现原子性。</p>
 <p>   如何修复？我们只需要给共享变量的访问加上锁，确保每个线程获取 proc_info 时，只有一个，就像下面这样<br>     <img src="/2021/11/10/操作系统并发之常见问题/img_2.png" alt="img_2.png"><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_3.png" alt="img_3.png"></p>
 <p>   <strong>违反顺序缺陷</strong><br>    <img src="/2021/11/10/操作系统并发之常见问题/img_4.png" alt="img_4.png"><br>   观察上面的代码，如果线程 1 并没有首先执行，线程 2 就会引用空指针异常</p>
 <p>   我们希望的是线程 1 创建完毕后，线程 2 读取到 mThread 的 State 值</p>
-<p>   因此违反顺序缺陷的定义是 “ <strong>两个内存访问的预期顺序</strong> 被打破了（即 A 应该在 B 之前执<br>   行，但是实际运行中却不是这个顺序）”</p>
+<p>   因此违反顺序缺陷的定义是 “ <strong>两个内存访问的预期顺序</strong> 被打破了（即 A 应该在 B 之前执行，但是实际运行中却不是这个顺序）”</p>
 <p>   如何修复呢？我们可以通过 <strong>条件变量</strong> 来强制保持顺序访问<br>   <img src="/2021/11/10/操作系统并发之常见问题/img_5.png" alt="img_5.png"><br>   <img src="/2021/11/10/操作系统并发之常见问题/img_12.png" alt="img_12.png"></p>
 <p>   在这段代码中，我们添加的 mtLock 锁来控制访问 mtInit 变量(line:11)以及条件变量 mtCond ，通过 mtInit 来判断是否需要放入(line:23) <strong>条件变量队列中</strong>，<br>   关于条件变量（这里你可以简单的理解为一个队列），wait 是等待并入队，signal 则是唤醒并出队。<br>   这样我们的代码也就保证的顺序性</p>
 <p>   在论文的研究中发现，97% 非死锁问题 是违反原子性与违反顺序，因此我们应该着重关注这些问题。</p>
@@ -189,7 +189,7 @@
 </ul>
 <p><strong>循环等待</strong></p>
 <p>预防此问题，最实用的方法则是获取锁时是全序（total ordering）的，假设有两个锁 L1、L2，线程 1 获取 L1、L2 锁，线程 2 获取 L1、L2 锁，<br>按照<strong>顺序的获取锁</strong>，就不会在产生此问题了</p>
-<p>当然顺序获取在复杂应用中（很多锁的情况），就不在这么适用了，另外一种则是偏序（partial<br>ordering），偏序也是全序只不过用了<strong>比较大小</strong>的方式进行先后顺序的获取</p>
+<p>当然顺序获取在复杂应用中（很多锁的情况），就不在这么适用了，另外一种则是偏序（partial ordering），偏序也是全序只不过用了<strong>比较大小</strong>的方式进行先后顺序的获取</p>
 <p><img src="/2021/11/10/操作系统并发之常见问题/img_7.png" alt="img_7.png"><br>这里使用到了地址高低位的技巧来保证锁的顺序，从而避免了死锁，Linux 中的内存映射就是一个偏序锁的好例子</p>
 <p><strong>持有并等待</strong></p>
 <p>死锁的持有并等待条件，可以通过原子地抢锁来避免。 </p>
