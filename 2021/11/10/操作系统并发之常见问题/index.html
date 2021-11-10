@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/11/10/操作系统并发之常见问题/img_8.png">
 <meta property="og:image" content="http://yoursite.com/2021/11/10/操作系统并发之常见问题/img_9.png">
 <meta property="og:image" content="http://yoursite.com/2021/11/10/操作系统并发之常见问题/img_10.png">
-<meta property="og:updated_time" content="2021-11-10T16:00:33.686Z">
+<meta property="og:updated_time" content="2021-11-10T16:06:00.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统并发之常见问题">
 <meta name="twitter:description" content="并发程序中缺陷的类型 非死锁缺陷 死锁缺陷  在 2008 年发表的 Learning from Mistakes — A Comprehensive Study on RealWorld Concurrency Bug Characteristics 论文中，进行了详细的说明通过知名的开源软件已知的并发问题统计，发现出错最多的是非死锁缺陷 非死锁缺陷 主要有两种常见的：违反原子性、错误顺序缺陷">
@@ -166,7 +166,7 @@
 <h4 id="非死锁缺陷"><a href="#非死锁缺陷" class="headerlink" title="非死锁缺陷"></a>非死锁缺陷</h4><p> 主要有两种常见的：违反原子性、错误顺序缺陷</p>
 <p> <strong>违反原子性缺陷</strong><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_1.png" alt="img_1.png"><br>   第一个线程检查 proc_info 非空后打印，第二个线程将 proc_info 指针置为 NULL,现在当第一个线程进入非空判断后(line:2)，发生中断，时间片轮转到第二个线程将 proc_info 指针置为NUll，<br>   显然这样会照成引用空指针，最后程序崩溃，显然这不是我们像要的。</p>
 <p>   什么是原子性？要么一致，要么不一致。</p>
-<p>   定义引出：由上面的问题，我们可以定义这类问题，即 if 判断应该和代码块内部保持一致。即代码段本意是原子的，但在执行中并没有强制实现原子性。</p>
+<p>   定义引出：由上面的问题，我们可以定义这类问题，即 if 判断应该和代码块内部保持一致。即代码段本意是原子的（整块执行），但在执行中并没有强制实现原子性。</p>
 <p>   如何修复？我们只需要给共享变量的访问加上锁，确保每个线程获取 proc_info 时，只有一个，就像下面这样<br>     <img src="/2021/11/10/操作系统并发之常见问题/img_2.png" alt="img_2.png"><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_3.png" alt="img_3.png"></p>
 <p>   <strong>违反顺序缺陷</strong><br>    <img src="/2021/11/10/操作系统并发之常见问题/img_4.png" alt="img_4.png"><br>   观察上面的代码，如果线程 1 并没有首先执行，线程 2 就会引用空指针异常</p>
 <p>   我们希望的是线程 1 创建完毕后，线程 2 读取到 mThread 的 State 值</p>
