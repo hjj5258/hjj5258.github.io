@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-11-07T10:01:38.516Z</updated>
+  <updated>2021-11-10T15:41:29.232Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统并发之常见问题</title>
+    <link href="http://yoursite.com/2021/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B9%B6%E5%8F%91%E4%B9%8B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2021/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B9%B6%E5%8F%91%E4%B9%8B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</id>
+    <published>2021-11-10T13:38:55.000Z</published>
+    <updated>2021-11-10T15:41:29.232Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="并发程序中缺陷的类型"><a href="#并发程序中缺陷的类型" class="headerlink" title="并发程序中缺陷的类型"></a>并发程序中缺陷的类型</h3><ul><li>非死锁缺陷</li><li>死锁缺陷</li></ul><p>在 2008 年发表的 <a href="https://www.cs.columbia.edu/~junfeng/09fa-e6998/papers/concurrency-bugs.pdf" target="_blank" rel="noopener">Learning from Mistakes — A Comprehensive Study on Real<br>World Concurrency Bug Characteristics</a> 论文中，进行了详细的说明<br><img src="/2021/11/10/操作系统并发之常见问题/img.png" alt="img.png"><br>通过知名的开源软件已知的并发问题统计，发现出错最多的是非死锁缺陷</p><h4 id="非死锁缺陷"><a href="#非死锁缺陷" class="headerlink" title="非死锁缺陷"></a>非死锁缺陷</h4><p> 主要有两种常见的：违反原子性、错误顺序缺陷</p><p> <strong>违反原子性缺陷</strong><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_1.png" alt="img_1.png"><br>   第一个线程检查 proc_info 非空后打印，第二个线程将 proc_info 指针置为 NULL<br>   现在当第一个线程进入非空判断后(line:2)，发生中断，时间片轮转到第二个线程将 proc_info 指针置为NUll，<br>   显然这样会照成引用空指针，最后程序崩溃，显然这不是我们像要的。</p><p>   什么是原子性？要么一致，要么不一致。</p><p>   定义引出：由上面的问题，我们可以定义这类问题，即 if 判断应该和代码块内部保持一致。<br>         即代码段本意是原子的，但在执行中并没有强制实现原子性。</p><p>   如何修复？我们只需要给共享变量的访问加上锁，确保每个线程获取 proc_info 时，只有一个，就像下面这样<br>     <img src="/2021/11/10/操作系统并发之常见问题/img_2.png" alt="img_2.png"><br>     <img src="/2021/11/10/操作系统并发之常见问题/img_3.png" alt="img_3.png"></p><p>   <strong>违反顺序缺陷</strong><br>    <img src="/2021/11/10/操作系统并发之常见问题/img_4.png" alt="img_4.png"><br>   观察上面的代码，如果线程 1 并没有首先执行，线程 2 就会引用空指针异常</p><p>   我们希望的是线程 1 创建完毕后，线程 2 读取到 mThread 的 State 值</p><p>   因此违反顺序缺陷的定义是 “ <strong>两个内存访问的预期顺序</strong> 被打破了（即 A 应该在 B 之前执<br>   行，但是实际运行中却不是这个顺序）”</p><p>   如何修复呢？我们可以通过 <strong>条件变量</strong> 来强制保持顺序访问<br>   <img src="/2021/11/10/操作系统并发之常见问题/img_5.png" alt="img_5.png"><br>   <img src="/2021/11/10/操作系统并发之常见问题/img_12.png" alt="img_12.png"></p><p>   在这段代码中，我们添加的 mtLock 锁来控制访问 mtInit 变量(line:11)以及条件变量 mtCond ，通过 mtInit 来判断是否需要放入(line:23) <strong>条件变量队列中</strong>，<br>   关于条件变量（这里你可以简单的理解为一个队列），wait 是等待并入队，signal 则是唤醒并出队。<br>   这样我们的代码也就保证的顺序性</p><p>   在论文的研究中发现，97% 非死锁问题 是违反原子性与违反顺序，因此我们应该着重关注这些问题。</p><h4 id="死锁缺陷"><a href="#死锁缺陷" class="headerlink" title="死锁缺陷"></a>死锁缺陷</h4><p>一个经典的死锁案例</p><p><img src="/2021/11/10/操作系统并发之常见问题/img_6.png" alt="img_6.png"></p><p>线程 1 Lock(L1) Lock(L2)，线程 2 Lock(L2) Lock(L1), 当线程 1 占有锁 L1，发生上下文切换到 线程 2，<br>线程 2 锁住了 L2，当试图锁住 L1时，发现 线程 1 已经持有 L1，而线程 1 并没有释放锁 L1，所以发生了死锁</p><p>为什么会发生死锁？<br>我们发现上述情况是互<strong>相依赖对方的锁</strong>，当对方互相占有锁时，双方都没办法释放，很重要的原因是<strong>锁的顺序</strong></p><p>另外一种情况是封装，例如在Java Vector类中的 AddAll() 方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector v1, v2;</span><br><span class="line">v1.AddAll(v2);</span><br></pre></td></tr></table></figure></p><p>因为在内部需要保证线程安全，v1 v2的锁都需要获取，假设 AddAll 方法，先给v1 上锁，再给 v2 上锁，同时此刻有另外一个线程在调用 v2.AddAll(v1),<br>那么此时就有可能照成死锁，所以<strong>封装会屏蔽一些信息</strong>，我们要确保小心的使用封装的方法，并且要考虑会出现的情况。</p><p><strong>产生死锁的 4 个条件</strong>（如果这 4 个条件的任何一个没有满足，死锁就不会产生）</p><ul><li>互斥：线程对于需要的资源进行互斥的访问（例如一个线程抢到锁）。</li><li>持有并等待：线程持有了资源（例如已将持有的锁），同时又在等待其他资源（例如，需要获得的锁）。</li><li>非抢占：线程获得的资源（例如锁），不能被抢占</li><li>循环等待：线程之间存在一个环路，环路上每个线程都额外持有一个资源，而这<br>个资源又是下一个线程要申请的。</li></ul><p><strong>循环等待</strong></p><p>预防此问题，最实用的方法则是获取锁时是全序（total ordering）的，假设有两个锁 L1、L2，线程 1 获取 L1、L2 锁，线程 2 获取 L1、L2 锁，<br>按照<strong>顺序的获取锁</strong>，就不会在产生此问题了</p><p>当然顺序获取在复杂应用中（很多锁的情况），就不在这么适用了，另外一种则是偏序（partial<br>ordering），偏序也是全序只不过用了<strong>比较大小</strong>的方式进行先后顺序的获取</p><p><img src="/2021/11/10/操作系统并发之常见问题/img_7.png" alt="img_7.png"><br>这里使用到了地址高低位的技巧来保证锁的顺序，从而避免了死锁，Linux 中的内存映射就是一个偏序锁的好例子</p><p><strong>持有并等待</strong></p><p>死锁的持有并等待条件，可以通过原子地抢锁来避免。 </p><p><img src="/2021/11/10/操作系统并发之常见问题/img_8.png" alt="img_8.png"></p><p>由于在拿到 prevention 锁之后，线程不会产生切换，从而避免的死锁，<br>任何其他的线程想要访问 L1、L2 都必须通过 拿到 prevention（全局锁）后才能执行。<br>其实就是在获取锁时，保证只有一个线程进入，但也降低了并发</p><p><strong>非抢占</strong></p><p><img src="/2021/11/10/操作系统并发之常见问题/img_9.png" alt="img_9.png"></p><p>在调用 unlock 之前，锁是被占有的，在获取 L1 锁后，我们尝试获取 L2，如果获取失败我们就会释放 L1 锁，<br>并重新执行，确保一次性拿到 L1 和 L2锁。其实也是避免依赖，在获取 L2 锁时，失败就重来。</p><p>这种情况下会导致活锁，两个线程有可能一直重复，又同时都抢锁失败，这种情况下，<strong>系统一直在运行这段代码</strong></p><p><strong>互斥</strong></p><p>最后的方法是，避免互斥的存在，如果没有互斥，依赖也就不复存在了，那么怎么样才能保证程序的正常，又避免互斥呢？</p><p>想法很简单：通过强大的硬件指令，我们可以构造出不需要锁的数据结构，例如比较并交换（compare-and-swap）CAS（网上很多资料不在赘述），<br>虽然避免了死锁，但有可能产生活锁</p><p><strong>通过调度避免死锁</strong></p><p>除了死锁预防，某些场景更适合死锁避免（avoidance）。在使用之前我们需要了解全局的信息，包<br>括不同线程在运行中对锁的需求情况，从而使得后续的调度能够避免产生死锁</p><p><img src="/2021/11/10/操作系统并发之常见问题/img_10.png" alt="img_10.png"></p><p>只要避免 T1 T2 重叠就能避免死锁</p><p><strong>检查和恢复</strong></p><p>最后一种也就是<strong>重启大法</strong>，如果一个操作系统一年死机一次，你会重启系统，然后继续愉快的使用。</p><p>提示：不要总是完美（ TOM WEST 定律），不是所有值得做的事情都值得做好，如果坏事很少发生，并且造成的影响很小，那么我们不应该去花费大<br>量的精力去预防它</p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>并发程序中缺陷的类型，大致分为两类：<strong>非死锁缺陷、死锁缺陷</strong></p><p>产生死锁的 4 个条件：互斥（CAS避免）、持有并等待（全局锁保证原子执行）、非抢占（trylock）、循环等待（顺序的获取锁）<br>通过在实际项目中统计总结出并发的缺陷，进行分类，以及产生的原因，进而避免这类问题的发生。</p><p>通过高质量的书籍是获取计算机论文中压缩的信息很好的途径，作者既保持了高浓度，也毫无保留的给出了<strong>信息源</strong>，这对我的学习方式有很大改变。</p><p>为什么读论文？因为一切都有起因，一切都是演化而来，问题不是凭空产生的。比起某些不负责任的博客、书籍，我觉得论文是真正的研究了问题，搞清楚了前因后果，真正去实践、验证过的，这样留下的才是有价值的。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;并发程序中缺陷的类型&quot;&gt;&lt;a href=&quot;#并发程序中缺陷的类型&quot; class=&quot;headerlink&quot; title=&quot;并发程序中缺陷的类型&quot;&gt;&lt;/a&gt;并发程序中缺陷的类型&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;非死锁缺陷&lt;/li&gt;
+&lt;li&gt;死锁缺陷&lt;/li&gt;
+&lt;/ul&gt;
+&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="操作系统" scheme="http://yoursite.com/tags/操作系统/"/>
+    
+  </entry>
   
   <entry>
     <title>操作系统并发之信号量</title>
